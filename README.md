@@ -9,3 +9,4 @@ Interactive segmentation
 
 - Add functionality to auto-download trained weights
 - Avoid loading all models in initialization - load it on the fly like torch.hub
+- Provide a coherent interface to support any type of input
