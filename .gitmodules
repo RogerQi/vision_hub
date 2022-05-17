@@ -1,0 +1,3 @@
+[submodule "interactive_seg/ritm_interactive_segmentation"]
+	path = interactive_seg/ritm_interactive_segmentation
+	url = https://github.com/RogerQi/ritm_interactive_segmentation
