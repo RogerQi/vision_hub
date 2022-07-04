@@ -2,8 +2,7 @@ import importlib
 import sys
 import os
 
-sys.path.append('.')
-sys.path.append('..')
+sys.path.append('aot-benchmark')
 
 import numpy as np
 import torch

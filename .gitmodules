@@ -4,3 +4,6 @@
 [submodule "vision_hub/interactive_seg/ritm_interactive_segmentation"]
 	path = vision_hub/interactive_seg/ritm_interactive_segmentation
 	url = https://github.com/RogerQi/ritm_interactive_segmentation
+[submodule "vision_hub/vos/aot-benchmark"]
+	path = vision_hub/vos/aot-benchmark
+	url = https://github.com/yoxu515/aot-benchmark
