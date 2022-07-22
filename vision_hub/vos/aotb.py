@@ -2,16 +2,18 @@ import importlib
 import sys
 import os
 
-sys.path.append('aot-benchmark')
+base_dir = os.path.join(os.path.dirname(__file__), 'aot-benchmark')
+
+sys.path.insert(0, base_dir)
 
 import numpy as np
 import torch
 import torch.nn.functional as F
 from torchvision import transforms
 
+from vos_utils.checkpoint import load_network
 from networks.models import build_vos_model
 from networks.engines import build_engine
-from utils.checkpoint import load_network
 
 import dataloaders.video_transforms as tr
 
@@ -36,10 +38,6 @@ class aot_segmenter:
                                  cfg.MODEL_ALIGN_CORNERS),
             tr.MultiToTensor()
         ])
-        
-        self.tracked_obj_idx_list = []
-        self.obj_num = 0
-        self.frame_cnt = 0
         self.cfg = cfg
         
         self.reset_engine()
@@ -50,10 +48,10 @@ class aot_segmenter:
         exp_name = 'AOT Tool'
         stage = 'pre_ytb_dav'
         model = 'aotb'
-        ckpt_path = './pretrain_models/AOTB_PRE_YTB_DAV.pth'
+        ckpt_path = os.path.join(base_dir, './pretrain_models/AOTB_PRE_YTB_DAV.pth')
         gpu_id = gpu_id
-        data_path = './datasets/Demo'
-        output_path = './demo_output'
+        data_path = os.path.join(base_dir, './datasets/Demo')
+        output_path = os.path.join(base_dir, './demo_output')
         max_resolution = 480*1.3
 
         engine_config = importlib.import_module('configs.' + stage)
@@ -149,5 +147,8 @@ class aot_segmenter:
         return pred_label.squeeze(0).squeeze(0).cpu().numpy().astype(np.uint8)
     
     def reset_engine(self):
+        self.tracked_obj_idx_list = []
+        self.obj_num = 0
+        self.frame_cnt = 0
         self.model.eval()
         self.engine.restart_engine()
