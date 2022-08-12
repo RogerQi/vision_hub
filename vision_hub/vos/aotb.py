@@ -11,7 +11,7 @@ import torch
 import torch.nn.functional as F
 from torchvision import transforms
 
-from vos_utils.checkpoint import load_network
+from utils.checkpoint import load_network
 from networks.models import build_vos_model
 from networks.engines import build_engine
 
